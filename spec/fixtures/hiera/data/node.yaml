@@ -1,0 +1,9 @@
+---
+dnsmasq::options:
+  cache-size: 0
+dnsmasq::host_records:
+  nas.example.com:
+    ip: 192.0.2.10
+dnsmasq::cnames:
+  files.example.com:
+    target: nas.example.com

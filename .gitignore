@@ -1,0 +1,15 @@
+/.bundle/
+/vendor/
+/Gemfile.lock
+/pkg/
+/spec/fixtures/manifests/
+/spec/fixtures/modules/
+/.vagrant/
+/coverage/
+/log/
+/junit/
+/.yardoc/
+/doc/
+/inventory.yaml
+/spec/fixtures/litmus_inventory.yaml
+.DS_Store

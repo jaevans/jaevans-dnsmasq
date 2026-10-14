@@ -1,0 +1,4 @@
+---
+lookup_options:
+  '^dnsmasq::(options|host_records|cnames|addresses|servers|mx_hosts|srv_hosts|txt_records|ptr_records|naptr_records|caa_records|dns_rrs|dhcp_ranges|dhcp_hosts|dhcp_options|dhcp_boots|dhcp_matches|tag_ifs|dhcp_vendorclasses|pxe_services)$':
+    merge: deep

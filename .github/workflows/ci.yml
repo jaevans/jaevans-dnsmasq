@@ -1,0 +1,64 @@
+---
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit:
+    name: Unit (OpenVox ${{ matrix.openvox }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Ruby versions follow the openvox-agent builds (puppet_metadata AIO table).
+          - openvox: '8'
+            ruby: '3.2'
+          - openvox: '9'
+            ruby: '4.0'
+    env:
+      BUNDLE_WITHOUT: system_tests
+      OPENVOX_GEM_VERSION: '~> ${{ matrix.openvox }}.0'
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Static checks
+        run: bundle exec rake validate lint rubocop strings:validate:reference
+      - name: Unit tests
+        run: bundle exec rake parallel_spec
+
+  acceptance:
+    name: Acceptance (${{ matrix.setfile }}, ${{ matrix.collection }})
+    needs: unit
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        collection:
+          - openvox8
+          - openvox9
+        setfile:
+          - debian13-64
+    env:
+      BEAKER_PUPPET_COLLECTION: ${{ matrix.collection }}
+      BEAKER_SETFILE: ${{ matrix.setfile }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+      - name: Run acceptance tests
+        run: bundle exec rake beaker

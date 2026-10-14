@@ -1,0 +1,11 @@
+---
+dnsmasq::options:
+  domain: example.com
+  expand-hosts: true
+dnsmasq::host_records:
+  router.example.com:
+    ip: 192.0.2.1
+dnsmasq::srv_hosts:
+  _ldap._tcp.example.com:
+    target: ldap.example.com
+    port: 389

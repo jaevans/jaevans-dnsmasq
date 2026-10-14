@@ -1,0 +1,6 @@
+---
+# Replacing /etc/dnsmasq.conf drops these settings from the stock EL config.
+dnsmasq::options:
+  user: dnsmasq
+  group: dnsmasq
+  local-service: host
