@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 group :test do
   # jgrep (via facterdb) calls JSON.create_id=, which json 3 removed.
-  gem 'json', '< 3', require: false
+  gem 'json', '< 4', require: false
   gem 'puppet_metadata', '~> 6.0', require: false
   gem 'voxpupuli-test', '~> 15.0', require: false
 end
