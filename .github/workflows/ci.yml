@@ -15,7 +15,7 @@ concurrency:
 jobs:
   unit:
     name: Unit (OpenVox ${{ matrix.openvox }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
@@ -42,7 +42,7 @@ jobs:
   acceptance:
     name: Acceptance (${{ matrix.setfile }}, ${{ matrix.collection }})
     needs: unit
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
