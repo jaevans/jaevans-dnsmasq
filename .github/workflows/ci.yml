@@ -21,16 +21,16 @@ jobs:
       matrix:
         include:
           # Ruby versions follow the openvox-agent builds (puppet_metadata AIO table).
-          - openvox: '8'
-            ruby: '3.2'
-          - openvox: '9'
-            ruby: '4.0'
+          - openvox: '8.31.0'
+            ruby: '3.2.11'
+          - openvox: '9.1.0'
+            ruby: '4.0.7'
     env:
       BUNDLE_WITHOUT: system_tests
-      OPENVOX_GEM_VERSION: '~> ${{ matrix.openvox }}.0'
+      OPENVOX_GEM_VERSION: ${{ matrix.openvox }}
     steps:
-      - uses: actions/checkout@v7
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v7.0.1
+      - uses: ruby/setup-ruby@v1.329.0
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
@@ -55,10 +55,10 @@ jobs:
       BEAKER_PUPPET_COLLECTION: ${{ matrix.collection }}
       BEAKER_SETFILE: ${{ matrix.setfile }}
     steps:
-      - uses: actions/checkout@v7
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v7.0.1
+      - uses: ruby/setup-ruby@v1.329.0
         with:
-          ruby-version: '4.0'
+          ruby-version: '4.0.7'
           bundler-cache: true
       - name: Run acceptance tests
         run: bundle exec rake beaker
