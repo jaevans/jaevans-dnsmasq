@@ -30,7 +30,7 @@ jobs:
       OPENVOX_GEM_VERSION: ${{ matrix.openvox }}
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: ruby/setup-ruby@v1.329.0
+      - uses: ruby/setup-ruby@v1.335.0
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
@@ -56,7 +56,7 @@ jobs:
       BEAKER_SETFILE: ${{ matrix.setfile }}
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: ruby/setup-ruby@v1.329.0
+      - uses: ruby/setup-ruby@v1.335.0
         with:
           ruby-version: '4.0.7'
           bundler-cache: true
