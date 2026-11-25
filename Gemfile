@@ -10,7 +10,7 @@ group :test do
 end
 
 group :system_tests do
-  gem 'voxpupuli-acceptance', '4.4.0', require: false
+  gem 'voxpupuli-acceptance', '4.4.1', require: false
 end
 
 gem 'openvox', ENV.fetch('OPENVOX_GEM_VERSION', '9.1.0'), require: false
